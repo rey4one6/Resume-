@@ -39,3 +39,5 @@ git push -u origin main
 ## Editing later
 
 Edit `index.html`, commit, push — Railway redeploys automatically.
+
+<!-- trigger pages deploy -->

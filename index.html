@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reynold Broadie — Cybersecurity</title>
+<meta name="description" content="Reynold Broadie — Journeyman pipefitter-welder pivoting to cybersecurity. CompTIA Security+ in progress. Calgary, AB.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+<style>
+  :root{
+    --bg:#1f1f28; --bg2:#2a2a37; --bg3:#16161d;
+    --fg:#dcd7ba; --muted:#9e9b8b; --faint:#6f6d5f;
+    --blue:#7e9cd8; --green:#98bb6c; --red:#e46876;
+    --orange:#ffa066; --violet:#957fb8; --teal:#7aa89f;
+    --border:#3a3a4a; --radius:10px;
+    --mono:ui-monospace,'Cascadia Code','JetBrains Mono',Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.65;font-size:16px}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  /* ---------- header / nav ---------- */
+  header.top{position:sticky;top:0;z-index:50;background:rgba(31,31,40,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;
+    padding-top:12px;padding-bottom:12px}
+  .brand{font-family:var(--mono);font-size:15px;color:var(--green)}
+  .brand .at{color:var(--faint)}
+  nav.links{display:flex;gap:18px;font-size:14px}
+  nav.links a{color:var(--muted)}
+  nav.links a:hover{color:var(--fg);text-decoration:none}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 48px}
+  .term{font-family:var(--mono);font-size:14px;color:var(--muted);
+    background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px 18px;margin-bottom:28px;overflow-x:auto;white-space:nowrap}
+  .term .p{color:var(--green)} .term .d{color:var(--blue)}
+  .term .c{color:var(--orange)}
+  h1{font-size:clamp(34px,6vw,52px);line-height:1.1;letter-spacing:-.5px;margin-bottom:10px}
+  h1 .accent{color:var(--blue)}
+  .tagline{font-size:19px;color:var(--muted);max-width:640px;margin-bottom:26px}
+  .tagline strong{color:var(--fg);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-block;padding:10px 22px;border-radius:8px;font-weight:600;font-size:15px;
+    border:1px solid var(--border);color:var(--fg);background:var(--bg2)}
+  .btn:hover{text-decoration:none;border-color:var(--blue)}
+  .btn.primary{background:var(--blue);border-color:var(--blue);color:#101018}
+  .btn.primary:hover{background:#8fabe0}
+
+  /* ---------- sections ---------- */
+  section{padding:34px 0;border-top:1px solid var(--border)}
+  h2{font-family:var(--mono);font-size:15px;text-transform:uppercase;letter-spacing:2px;
+    color:var(--green);margin-bottom:22px}
+  h2::before{content:"~/";color:var(--faint);margin-right:6px}
+  h3{font-size:19px;margin-bottom:4px}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .meta .when{color:var(--orange);font-family:var(--mono);font-size:13px}
+  ul.tight{margin:8px 0 22px 20px}
+  ul.tight li{margin-bottom:7px}
+  ul.tight li::marker{color:var(--blue)}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 22px;margin-bottom:16px}
+  .card p{color:var(--muted);font-size:15px;margin-top:6px}
+  .card .stack{margin-top:10px;font-family:var(--mono);font-size:12.5px;color:var(--teal)}
+
+  /* ---------- skills ---------- */
+  .skill-group{margin-bottom:20px}
+  .skill-group h4{font-size:14px;color:var(--violet);margin-bottom:10px;
+    font-family:var(--mono);text-transform:uppercase;letter-spacing:1px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{font-family:var(--mono);font-size:13px;background:var(--bg3);
+    border:1px solid var(--border);border-radius:20px;padding:5px 13px;color:var(--fg)}
+
+  /* ---------- education ---------- */
+  .edu{display:grid;gap:12px}
+  .edu .row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px 18px}
+  .edu .row .s{color:var(--muted);font-size:14px}
+  .badge{font-family:var(--mono);font-size:12px;color:var(--orange);border:1px solid var(--orange);
+    border-radius:20px;padding:3px 12px;white-space:nowrap;align-self:center}
+
+  footer{border-top:1px solid var(--border);padding:30px 0 46px;color:var(--faint);
+    font-size:14px;text-align:center;font-family:var(--mono)}
+
+  @media (max-width:600px){
+    nav.links{display:none}
+    .hero{padding:48px 0 34px}
+  }
+  @media print{
+    header.top,.cta-row,footer{display:none}
+    body{background:#fff;color:#111;font-size:12px}
+    .card,.term,.edu .row{background:#fff;border-color:#ccc}
+    h1{font-size:28px} h2{color:#111} a{color:#111}
+    section{padding:16px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">rey<span class="at">@</span>calgary:~$</div>
+    <nav class="links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="term"><span class="p">rey@calgary</span><span class="d">:~$</span> <span class="c">whoami</span></div>
+    <h1>Reynold Broadie<br><span class="accent">Cybersecurity</span></h1>
+    <p class="tagline">Journeyman pipefitter-welder bringing <strong>12 years of high-risk industrial discipline</strong> — blueprints, compliance docs, zero-failure safety culture — into security. <strong>CompTIA Security+ in progress.</strong> Homelab built like production.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn" href="https://github.com/rey4one6" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <section id="experience">
+    <h2>experience</h2>
+    <div class="card">
+      <h3>Journeyman Pipefitter-Welder</h3>
+      <div class="meta">Various Contractors · Calgary, AB &nbsp;·&nbsp; <span class="when">05/2017 – Present</span></div>
+      <ul class="tight">
+        <li>Executed shutdowns, maintenance, and new construction in high-risk industrial environments requiring strict adherence to safety protocols and procedures.</li>
+        <li>Interpreted complex blueprints and technical specifications (P&amp;IDs, isometrics) — directly transferable to reading network diagrams and security architecture documentation.</li>
+        <li>Maintained rigorous compliance documentation across every job — the same muscle as audit trails and change control.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>projects</h2>
+    <div class="card">
+      <h3>Immutable Container Host Deployment</h3>
+      <div class="meta">Fedora CoreOS + Podman + Quadlets &nbsp;·&nbsp; <span class="when">2026</span></div>
+      <p>Secure, self-healing media stack on an immutable host: rootless Podman, SELinux enforcing, Tailscale VPN, 3-2-1 backups, resource throttling, real-time alerts, sub-15-minute disaster recovery via Butane/Ignition.</p>
+      <div class="stack">Fedora CoreOS · Podman · Quadlets · SELinux · Tailscale · Duplicati</div>
+    </div>
+    <div class="card">
+      <h3>Container Migration &amp; Platform Evaluation</h3>
+      <div class="meta">Ubuntu + Docker → Fedora Server + Podman Compose &nbsp;·&nbsp; <span class="when">2026</span></div>
+      <p>Migrated a 14-container stack (Arr suite, Jellyfin, monitoring, backups) from Docker to Podman. Evaluated daemon vs. daemonless/rootless tradeoffs, integrated the stack into systemd for unified management, fixed SELinux contexts and UID mapping, documented the full performance/security comparison.</p>
+      <div class="stack">Docker · Podman Compose · systemd · SELinux · Ubuntu · Fedora</div>
+    </div>
+    <div class="card">
+      <h3>Media Automation Stack</h3>
+      <div class="meta">Ubuntu Server + Docker Compose &nbsp;·&nbsp; <span class="when">2025 – 2026</span></div>
+      <p>Built and maintained an automated media server: 14 containers covering media management, monitoring, and backups — foundational reps in containerization, networking, persistent storage, and service orchestration.</p>
+      <div class="stack">Docker Compose · Linux networking · ZFS · reverse proxy</div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>skills</h2>
+    <div class="skill-group">
+      <h4>Linux &amp; Systems</h4>
+      <div class="pills">
+        <span class="pill">Ubuntu</span><span class="pill">NixOS</span><span class="pill">Fedora CoreOS</span>
+        <span class="pill">systemd</span><span class="pill">cron</span><span class="pill">SELinux</span>
+        <span class="pill">firewalld</span><span class="pill">SSH key management</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Containers &amp; Virtualization</h4>
+      <div class="pills">
+        <span class="pill">Docker</span><span class="pill">Podman</span><span class="pill">Quadlets</span>
+        <span class="pill">KVM/QEMU</span><span class="pill">Proxmox VE</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Networking</h4>
+      <div class="pills">
+        <span class="pill">TCP/IP</span><span class="pill">VLANs</span><span class="pill">WireGuard</span>
+        <span class="pill">Tailscale</span><span class="pill">VPN management</span><span class="pill">DNS/DHCP</span>
+        <span class="pill">reverse proxy</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Security</h4>
+      <div class="pills">
+        <span class="pill">Zero-trust architecture</span><span class="pill">Least privilege</span>
+        <span class="pill">Attack surface reduction</span><span class="pill">Supply chain risk mitigation</span>
+        <span class="pill">Encrypted backups (Duplicati)</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Storage &amp; Workflow</h4>
+      <div class="pills">
+        <span class="pill">ZFS</span><span class="pill">LVM thin provisioning</span>
+        <span class="pill">Infrastructure as code</span><span class="pill">Git &amp; GitHub</span>
+        <span class="pill">ntfy.sh alerts</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>education &amp; certs</h2>
+    <div class="edu">
+      <div class="row">
+        <div><strong>CompTIA Security+</strong><div class="s">Self-directed study · active homelab</div></div>
+        <span class="badge">IN PROGRESS</span>
+      </div>
+      <div class="row">
+        <div><strong>Pipefitting Apprenticeship</strong><div class="s">SAIT Polytechnic, Calgary</div></div>
+      </div>
+      <div class="row">
+        <div><strong>Welding Apprenticeship</strong><div class="s">SAIT Polytechnic, Calgary</div></div>
+      </div>
+      <div class="row">
+        <div><strong>Plumbing Apprenticeship (3rd Year)</strong><div class="s">SAIT Polytechnic, Calgary</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>contact</h2>
+    <div class="card">
+      <h3>Let's talk.</h3>
+      <p style="margin-top:10px">
+        📧 <a href="mailto:rey4one6@icloud.com">rey4one6@icloud.com</a><br>
+        📞 <a href="tel:+15878938787">(587) 893-8787</a><br>
+        📍 Calgary, AB<br>
+        💻 <a href="https://github.com/rey4one6" target="_blank" rel="noopener">github.com/rey4one6</a>
+      </p>
+    </div>
+  </section>
+</div>
+
+<footer>rey@calgary:~$ _</footer>
+
+</body>
+</html>

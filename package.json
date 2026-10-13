@@ -1,0 +1,1 @@
+{"engines":{"node":">=18"},"name":"rey-resume","private":true,"scripts":{"start":"node server.js"},"version":"1.0.0"}

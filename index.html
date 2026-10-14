@@ -7,14 +7,66 @@
 <meta name="description" content="Reynold Broadie — Journeyman pipefitter-welder pivoting to cybersecurity. CompTIA Security+ in progress. Calgary, AB.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
 <style>
+  /* Kanagawa Dragon — the default theme */
   :root{
     --bg:#1f1f28; --bg2:#2a2a37; --bg3:#16161d;
     --fg:#dcd7ba; --muted:#9e9b8b; --faint:#6f6d5f;
     --blue:#7e9cd8; --green:#98bb6c;
     --orange:#ffa500; --violet:#957fb8; --teal:#7aa89f;
-    --border:#3a3a4a; --radius:10px;
+    --border:#3a3a4a; --header-bg:rgba(31,31,40,.92); --on-primary:#101018;
+    --radius:10px;
     --mono:ui-monospace,'Cascadia Code','JetBrains Mono',Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;
+  }
+  /* micro colorscheme themes — palettes follow micro's own schemes */
+  [data-theme="kanagawa-dragon"]{
+    --bg:#1f1f28; --bg2:#2a2a37; --bg3:#16161d;
+    --fg:#dcd7ba; --muted:#9e9b8b; --faint:#6f6d5f;
+    --blue:#7e9cd8; --green:#98bb6c;
+    --orange:#ffa500; --violet:#957fb8; --teal:#7aa89f;
+    --border:#3a3a4a; --header-bg:rgba(31,31,40,.92); --on-primary:#101018;
+  }
+  [data-theme="monokai"]{
+    --bg:#272822; --bg2:#3e3d32; --bg3:#1e1f1a;
+    --fg:#f8f8f2; --muted:#a6a693; --faint:#75715e;
+    --blue:#66d9ef; --green:#a6e22e;
+    --orange:#fd971f; --violet:#ae81ff; --teal:#e6db74;
+    --border:#4a4a3f; --header-bg:rgba(39,40,34,.92); --on-primary:#1e1f1a;
+  }
+  [data-theme="solarized-dark"]{
+    --bg:#002b36; --bg2:#073642; --bg3:#001e27;
+    --fg:#839496; --muted:#93a1a1; --faint:#586e75;
+    --blue:#268bd2; --green:#859900;
+    --orange:#cb4b16; --violet:#6c71c4; --teal:#2aa198;
+    --border:#0e4a5c; --header-bg:rgba(0,43,54,.92); --on-primary:#002b36;
+  }
+  [data-theme="gruvbox"]{
+    --bg:#282828; --bg2:#3c3836; --bg3:#1d2021;
+    --fg:#ebdbb2; --muted:#a89984; --faint:#7c6f64;
+    --blue:#83a598; --green:#b8bb26;
+    --orange:#fe8019; --violet:#d3869b; --teal:#8ec07c;
+    --border:#504945; --header-bg:rgba(40,40,40,.92); --on-primary:#282828;
+  }
+  [data-theme="dracula"]{
+    --bg:#282a36; --bg2:#44475a; --bg3:#1e1f29;
+    --fg:#f8f8f2; --muted:#bfc2d9; --faint:#6272a4;
+    --blue:#8be9fd; --green:#50fa7b;
+    --orange:#ffb86c; --violet:#bd93f9; --teal:#ff79c6;
+    --border:#44475a; --header-bg:rgba(40,42,54,.92); --on-primary:#282a36;
+  }
+  [data-theme="one-dark"]{
+    --bg:#282c34; --bg2:#2c313c; --bg3:#21252b;
+    --fg:#abb2bf; --muted:#828997; --faint:#5c6370;
+    --blue:#61afef; --green:#98c379;
+    --orange:#d19a66; --violet:#c678dd; --teal:#56b6c2;
+    --border:#3e4451; --header-bg:rgba(40,44,52,.92); --on-primary:#282c34;
+  }
+  [data-theme="duke-light"]{
+    --bg:#f0f0f0; --bg2:#ffffff; --bg3:#e6e6e6;
+    --fg:#000000; --muted:#404040; --faint:#808080;
+    --blue:#004080; --green:#3f7f5f;
+    --orange:#641e00; --violet:#780050; --teal:#0078a0;
+    --border:#c8c8c8; --header-bg:rgba(240,240,240,.92); --on-primary:#ffffff;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -24,15 +76,34 @@
   .wrap{max-width:860px;margin:0 auto;padding:0 22px}
 
   /* ---------- header / nav ---------- */
-  header.top{position:sticky;top:0;z-index:50;background:rgba(31,31,40,.92);
+  header.top{position:sticky;top:0;z-index:50;background:var(--header-bg);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   header.top .wrap{display:flex;align-items:center;justify-content:space-between;
-    padding-top:12px;padding-bottom:12px}
+    padding-top:12px;padding-bottom:12px;gap:12px}
   .brand{font-family:var(--mono);font-size:15px;color:var(--green)}
   .brand .at{color:var(--faint)}
   nav.links{display:flex;gap:18px;font-size:14px}
   nav.links a{color:var(--muted)}
   nav.links a:hover{color:var(--fg);text-decoration:none}
+
+  /* ---------- theme switcher ---------- */
+  .theme-wrap{position:relative;margin-left:auto}
+  .theme-btn{font-family:var(--mono);font-size:13px;color:var(--muted);
+    background:var(--bg2);border:1px solid var(--border);border-radius:20px;
+    padding:6px 13px;cursor:pointer;display:flex;align-items:center;gap:7px}
+  .theme-btn:hover{color:var(--fg);border-color:var(--blue)}
+  .theme-btn .dot{width:11px;height:11px;border-radius:50%;background:var(--blue);flex:none}
+  .theme-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:190px;
+    background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+    padding:6px;box-shadow:0 12px 32px rgba(0,0,0,.35);display:none;z-index:60}
+  .theme-menu.open{display:block}
+  .theme-item{display:flex;align-items:center;gap:10px;width:100%;
+    font-family:var(--mono);font-size:13px;color:var(--fg);background:transparent;
+    border:0;border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left}
+  .theme-item:hover{background:var(--bg3)}
+  .theme-item .swatch{width:13px;height:13px;border-radius:50%;flex:none;
+    border:1px solid var(--border)}
+  .theme-item .check{margin-left:auto;color:var(--green)}
 
   /* ---------- hero ---------- */
   .hero{padding:72px 0 48px}
@@ -49,8 +120,8 @@
   .btn{display:inline-block;padding:10px 22px;border-radius:8px;font-weight:600;font-size:15px;
     border:1px solid var(--border);color:var(--fg);background:var(--bg2)}
   .btn:hover{text-decoration:none;border-color:var(--blue)}
-  .btn.primary{background:var(--blue);border-color:var(--blue);color:#101018}
-  .btn.primary:hover{background:#8fabe0}
+  .btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-primary)}
+  .btn.primary:hover{filter:brightness(1.12)}
 
   /* ---------- sections ---------- */
   section{padding:34px 0;border-top:1px solid var(--border)}
@@ -113,6 +184,13 @@
     section{padding:16px 0}
   }
 </style>
+<script>
+  /* Apply the saved theme before first paint — avoids a flash of the default */
+  try {
+    var t = localStorage.getItem('resume-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
 </head>
 <body>
 
@@ -126,6 +204,12 @@
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
+    <div class="theme-wrap">
+      <button class="theme-btn" id="themeBtn" aria-haspopup="true" aria-expanded="false" title="Change color theme">
+        <span class="dot" aria-hidden="true"></span><span id="themeLabel">Kanagawa Dragon</span> ▾
+      </button>
+      <div class="theme-menu" id="themeMenu" role="menu"></div>
+    </div>
   </div>
 </header>
 
@@ -272,5 +356,63 @@
 
 <footer>rey@cyber:~$ _</footer>
 
+<script>
+/* Theme switcher — micro colorscheme themes, choice saved in localStorage */
+(function(){
+  var THEMES = [
+    { key:'kanagawa-dragon', label:'Kanagawa Dragon', swatch:'#7e9cd8' },
+    { key:'monokai',         label:'Monokai',         swatch:'#a6e22e' },
+    { key:'solarized-dark',  label:'Solarized Dark',  swatch:'#268bd2' },
+    { key:'gruvbox',         label:'Gruvbox',         swatch:'#b8bb26' },
+    { key:'dracula',         label:'Dracula',         swatch:'#bd93f9' },
+    { key:'one-dark',        label:'One Dark',        swatch:'#61afef' },
+    { key:'duke-light',      label:'Duke Light',      swatch:'#004080' }
+  ];
+  var KEY = 'resume-theme';
+  var btn = document.getElementById('themeBtn');
+  var label = document.getElementById('themeLabel');
+  var menu = document.getElementById('themeMenu');
+
+  function apply(key){
+    document.documentElement.setAttribute('data-theme', key);
+    var t = THEMES.find(function(x){ return x.key === key; }) || THEMES[0];
+    label.textContent = t.label;
+    try { localStorage.setItem(KEY, key); } catch (e) {}
+    menu.querySelectorAll('.theme-item').forEach(function(item){
+      item.querySelector('.check').textContent = item.dataset.key === key ? '✓' : '';
+    });
+  }
+
+  THEMES.forEach(function(t){
+    var b = document.createElement('button');
+    b.className = 'theme-item';
+    b.setAttribute('role', 'menuitem');
+    b.dataset.key = t.key;
+    b.innerHTML = '<span class="swatch" style="background:' + t.swatch + '"></span>'
+      + t.label + '<span class="check"></span>';
+    b.addEventListener('click', function(){ apply(t.key); close(); });
+    menu.appendChild(b);
+  });
+
+  function open(){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  function close(){ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    menu.classList.contains('open') ? close() : open();
+  });
+  document.addEventListener('click', function(e){
+    if (!menu.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved && THEMES.some(function(x){ return x.key === saved; })) apply(saved);
+  else apply('kanagawa-dragon');
+})();
+</script>
 </body>
 </html>

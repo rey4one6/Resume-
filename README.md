@@ -1,7 +1,16 @@
 # Rey's resume site → resume.rbroadie.ca
 
-Single-page static resume site (`index.html`, no build step, no JavaScript).
+Single-page static resume site (`index.html`, no build step).
 Hosted on Cloudflare Pages, deployed from the `rey4one6/Resume-` repo.
+
+## Themes
+
+A theme switcher (🎨 button in the header) cycles the site through palettes
+taken from the [micro](https://micro-editor.github.io/) text editor's
+colorschemes: Kanagawa Dragon (default), Monokai, Solarized Dark, Gruvbox,
+Dracula, One Dark, Duke Light. The visitor's choice is saved in
+`localStorage` (`resume-theme`) and applied before first paint so there's
+no flash of the default theme.
 
 ## How it deploys
 
